@@ -1,8 +1,15 @@
+#Andrew added bits to make sure there exists a location for output in local production.
+import os
+fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+if not os.path.isdir(fileOutputPath):
+        print('Making output path')
+        os.mkdir(fileOutputPath)
+
 # Auto generated configuration file
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: Configuration/GenProduction/fragment.py --fileout file:B2G-RunIISummer20UL16wmLHEGEN-00605.root --mc --eventcontent RAWSIM,LHE --datatier GEN,LHE --conditions 106X_mcRun2_asymptotic_v13 --beamspot Realistic25ns13TeV2016Collision --step LHE,GEN,SIM --geometry DB:Extended --era Run2_2016 -n 1000 --no_exec
+# with command line options: Configuration/GenProduction/fragment.py --fileout file:B2G-RunIISummer20UL16wmLHEGEN-00605.root --mc --eventcontent RAWSIM,LHE --datatier GEN,LHE --conditions 106X_mcRun2_asymptotic_v13 --beamspot Realistic25ns13TeV2016Collision --step LHE,GEN,SIM --geometry DB:Extended --era Run2_2016 -n 100 --no_exec
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run2_2016_cff import Run2_2016
@@ -26,7 +33,7 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1000)
+    input = cms.untracked.int32(100)
 )
 
 # Input source
@@ -38,7 +45,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('Configuration/GenProduction/fragment.py nevts:1000'),
+    annotation = cms.untracked.string('Configuration/GenProduction/bbtautau_fragment_2016.py nevts:100'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -56,7 +63,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
-    fileName = cms.untracked.string('file:B2G-RunIISummer20UL16wmLHEGEN-00605.root'),
+    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_SIM.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -66,7 +73,7 @@ process.LHEoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string('LHE'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('file:B2G-RunIISummer20UL16wmLHEGEN-00605_inLHE.root'),
+    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_LHE.root'),
     outputCommands = process.LHEEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -141,7 +148,7 @@ process.generator = cms.EDFilter("Pythia8HadronizerFilter",
 
 process.externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
     args = cms.vstring('/cvmfs/cms.cern.ch/phys_generator/gridpacks/2017/13TeV/madgraph/V5_2.6.5/exo_diboson/Spin-0/Radion_hh_htatahbb_incl_narrow/Radion_hh_htatahbb_incl_narrow_M1000_slc7_amd64_gcc700_CMSSW_10_6_19_tarball.tar.xz'),
-    nEvents = cms.untracked.uint32(1000),
+    nEvents = cms.untracked.uint32(100),
     numberOfParameters = cms.uint32(1),
     outputFile = cms.string('cmsgrid_final.lhe'),
     scriptName = cms.FileInPath('GeneratorInterface/LHEInterface/data/run_generic_tarball_cvmfs.sh')
