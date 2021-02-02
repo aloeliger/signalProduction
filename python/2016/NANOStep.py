@@ -1,3 +1,10 @@
+#Andrew added bits to make sure there exists a location for output in local production.
+import os
+fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+if not os.path.isdir(fileOutputPath):
+        print('Making output path')
+        os.mkdir(fileOutputPath)
+
 # Auto generated configuration file
 # using: 
 # Revision: 1.19 
@@ -22,12 +29,12 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1)
+    input = cms.untracked.int32(100)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:B2G-RunIISummer20UL16MiniAOD-00449.root'),
+    fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_MiniAOD.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -37,7 +44,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('step1 nevts:1'),
+    annotation = cms.untracked.string('step1 nevts:100'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )

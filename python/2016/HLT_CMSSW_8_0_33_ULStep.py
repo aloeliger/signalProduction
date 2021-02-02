@@ -1,3 +1,10 @@
+#Andrew added bits to make sure there exists a location for output in local production.
+import os
+fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+if not os.path.isdir(fileOutputPath):
+        print('Making output path')
+        os.mkdir(fileOutputPath)
+
 # Auto generated configuration file
 # using: 
 # Revision: 1.19 
@@ -22,13 +29,13 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(1)
+    input = cms.untracked.int32(100)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-    fileNames = cms.untracked.vstring('file:step1_RAW.root'),
+    fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_RAW.root'),
     inputCommands = cms.untracked.vstring('keep *', 
         'drop *_*_BMTF_*', 
         'drop *PixelFEDChannel*_*_*_*'),
@@ -41,7 +48,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('step1 nevts:1'),
+    annotation = cms.untracked.string('step1 nevts:100'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -54,7 +61,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-    fileName = cms.untracked.string('file:B2G-RunIISummer20UL16HLT-00449.root'),
+    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_DIGI2RAW.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
