@@ -1,9 +1,9 @@
 #Andrew added bits to make sure there exists a location for output in local production.
 import os
-fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
-if not os.path.isdir(fileOutputPath):
-        print('Making output path')
-        os.mkdir(fileOutputPath)
+#fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+#if not os.path.isdir(fileOutputPath):
+        #print('Making output path')
+        #os.mkdir(fileOutputPath)
 
 # Auto generated configuration file
 # using: 
@@ -63,7 +63,8 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
-    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_SIM.root'),
+    #fileName = cms.untracked.string('file:'+fileOutputPath+'step1_SIM.root'),
+    fileName = cms.untracked.string('file:step1_SIM.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -73,7 +74,8 @@ process.LHEoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string('LHE'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_LHE.root'),
+    #fileName = cms.untracked.string('file:'+fileOutputPath+'step1_LHE.root'),
+    fileName = cms.untracked.string('file:step1_LHE.root'),
     outputCommands = process.LHEEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )

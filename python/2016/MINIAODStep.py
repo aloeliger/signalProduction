@@ -1,9 +1,9 @@
 #Andrew added bits to make sure there exists a location for output in local production.
 import os
-fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
-if not os.path.isdir(fileOutputPath):
-        print('Making output path')
-        os.mkdir(fileOutputPath)
+#fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+#if not os.path.isdir(fileOutputPath):
+        #print('Making output path')
+        #os.mkdir(fileOutputPath)
 
 # Auto generated configuration file
 # using: 
@@ -35,7 +35,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_AODSIM.root'),
+    #fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_AODSIM.root'),
+    fileNames = cms.untracked.vstring('file:step1_AODSIM.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -62,7 +63,8 @@ process.MINIAODSIMoutput = cms.OutputModule("PoolOutputModule",
     dropMetaData = cms.untracked.string('ALL'),
     eventAutoFlushCompressedSize = cms.untracked.int32(-900),
     fastCloning = cms.untracked.bool(False),
-    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_MiniAOD.root'),
+    #fileName = cms.untracked.string('file:'+fileOutputPath+'step1_MiniAOD.root'),
+    fileName = cms.untracked.string('file:step1_MiniAOD.root'),
     outputCommands = process.MINIAODSIMEventContent.outputCommands,
     overrideBranchesSplitLevel = cms.untracked.VPSet(
         cms.untracked.PSet(
