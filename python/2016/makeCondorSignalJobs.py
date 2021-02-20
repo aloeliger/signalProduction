@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-#To use the this Job making cript run it as follows:
-#In general:./makecondorSignalJobs.py <path of CMSSW_10_6_20_src> <path of CMSSW_8_0_33_UL_src> <path to store NanoAOD files> -n <number of Jobs to be created>
-#For example: ./makecondorSignalJobs.py /afs/cern.ch/user/g/gparida/public/bbtautauAnalysis/CMSSW_10_6_20/src /afs/cern.ch/user/g/gparida/public/bbtautauAnalysis/CMSSW_8_0_33_UL/src /afs/cern.ch/user/g/gparida/public/bbtautauAnalysis/CMSSW_10_6_20/src/signalProductionWorkspace/python/2016/Output_Files -n 8
-#Next step to submit Jobs: ./ submit_all.jobb
+#To use the this Job making script, run it as follows in the CMSSW_10_6_20/src/signalProductionWorkspace/python/2016 area:
+#In general: python makecondorSignalJobs.py <path of CMSSW_10_6_20_src> <path of CMSSW_8_0_33_UL_src> <path to store NanoAOD files> -n <number of Jobs to be created>
+#For example: python makecondorSignalJobs.py /afs/cern.ch/user/g/gparida/public/bbtautauAnalysis/CMSSW_10_6_20/src /afs/cern.ch/user/g/gparida/public/bbtautauAnalysis/CMSSW_8_0_33_UL/src /afs/cern.ch/user/g/gparida/public/bbtautauAnalysis/CMSSW_10_6_20/src/signalProductionWorkspace/python/2016/Output_Files -n 8
+#Next step is to submit Jobs created by doing: ./ submit_all.jobb
 
 import os, sys,  imp, re, pprint, string
 from optparse import OptionParser
