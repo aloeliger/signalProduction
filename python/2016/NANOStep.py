@@ -1,9 +1,9 @@
 #Andrew added bits to make sure there exists a location for output in local production.
 import os
-fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
-if not os.path.isdir(fileOutputPath):
-        print('Making output path')
-        os.mkdir(fileOutputPath)
+#fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+#if not os.path.isdir(fileOutputPath):
+        #print('Making output path')
+        #os.mkdir(fileOutputPath)
 
 # Auto generated configuration file
 # using: 
@@ -34,7 +34,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:fileOutput/step1_MiniAOD.root'),
+    #fileNames = cms.untracked.vstring('file:fileOutput/step1_MiniAOD.root'),
+    fileNames = cms.untracked.vstring('file:step1_MiniAOD.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -44,7 +45,8 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('--filein=file:'+fileOutputPath+'step1_MiniAOD.root nevts:100'),
+    #annotation = cms.untracked.string('--filein=file:'+fileOutputPath+'step1_MiniAOD.root nevts:100'),
+    annotation = cms.untracked.string('--filein=file:step1_MiniAOD.root nevts:100'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -58,7 +60,8 @@ process.NANOAODSIMoutput = cms.OutputModule("NanoAODOutputModule",
         dataTier = cms.untracked.string('NANOAODSIM'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('file:'+fileOutputPath+'finalNanoAOD.root'),
+    #fileName = cms.untracked.string('file:'+fileOutputPath+'finalNanoAOD.root'),
+    fileName = cms.untracked.string('file:finalNanoAOD.root'),
     outputCommands = process.NANOAODSIMEventContent.outputCommands
 )
 

@@ -1,9 +1,9 @@
 #Andrew added bits to make sure there exists a location for output in local production.
 import os
-fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
-if not os.path.isdir(fileOutputPath):
-        print('Making output path')
-        os.mkdir(fileOutputPath)
+#fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+#if not os.path.isdir(fileOutputPath):
+        #print('Making output path')
+        #os.mkdir(fileOutputPath)
 
 # Auto generated configuration file
 # using: 
@@ -35,7 +35,8 @@ process.maxEvents = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("PoolSource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-    fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_RAW.root'),
+    #fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_RAW.root'),
+    fileNames = cms.untracked.vstring('file:step1_RAW.root'),
     inputCommands = cms.untracked.vstring('keep *', 
         'drop *_*_BMTF_*', 
         'drop *PixelFEDChannel*_*_*_*'),
@@ -61,7 +62,8 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_DIGI2RAW.root'),
+    #fileName = cms.untracked.string('file:'+fileOutputPath+'step1_DIGI2RAW.root'),
+    fileName = cms.untracked.string('file:step1_DIGI2RAW.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )

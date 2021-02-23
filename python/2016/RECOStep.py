@@ -1,9 +1,9 @@
 #Andrew added bits to make sure there exists a location for output in local production.
 import os
-fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
-if not os.path.isdir(fileOutputPath):
-        print('Making output path')
-        os.mkdir(fileOutputPath)
+#fileOutputPath = os.environ['CMSSW_BASE']+'/../fileOutput/'
+#if not os.path.isdir(fileOutputPath):
+        #print('Making output path')
+        #os.mkdir(fileOutputPath)
 
 # Auto generated configuration file
 # using: 
@@ -37,7 +37,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_DIGI2RAW.root'),
+    #fileNames = cms.untracked.vstring('file:'+fileOutputPath+'step1_DIGI2RAW.root'),
+    fileNames = cms.untracked.vstring('file:step1_DIGI2RAW.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -62,7 +63,8 @@ process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(31457280),
-    fileName = cms.untracked.string('file:'+fileOutputPath+'step1_AODSIM.root'),
+    #fileName = cms.untracked.string('file:'+fileOutputPath+'step1_AODSIM.root'),
+    fileName = cms.untracked.string('file:step1_AODSIM.root'),
     outputCommands = process.AODSIMEventContent.outputCommands
 )
 
